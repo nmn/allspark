@@ -30,8 +30,8 @@ var funcs = {
       apiRequest = request(options);
 
     } else {
-      console.log('path is ', __dirname + '\\xxx\\' + text);
-      apiRequest = fs.readFileAsync(__dirname +  text).then(function(audioFile){
+      console.log('path is ', 'D:\\home\\site\\wwwroot\\' + text);
+      apiRequest = fs.readFileAsync('D:\\home\\site\\wwwroot\\' + text).then(function(audioFile){
         options.body = audioFile;
         return post({
           url:  'https://api.wit.ai/speech',
