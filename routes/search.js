@@ -5,7 +5,7 @@ var request = require('request');
 
 router.post('/search', function(req, res) {
 
-  console.log("query", req.body.searchInput);
+  console.log("query", req.body);
 
   var query = encodeURIComponent(req.body.searchInput);
 
@@ -32,6 +32,11 @@ router.post('/search', function(req, res) {
 
   res.send('got data');
 
+});
+
+router.get('/search', function(req, res){
+  console.log(req.query.text);
+  res.send(200,'success');
 });
 
 function wikipedia(data){
