@@ -5,7 +5,7 @@ var Promise = require('bluebird');
 
 module.exports = {
   tweet: function(token, tokenSecret, tweetMessage){
-    tweetMessage ++ ' #apiconsf';
+    tweetMessage += ' #apiconsf';
     var T = new Twit({
       consumer_key: process.env.TWITTER_CONSUMER_KEY,
       consumer_secret: process.env.TWITTER_CONSUMER_SECRET,

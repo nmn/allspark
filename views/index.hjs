@@ -4,6 +4,9 @@
     <meta name="viewport" content="width=500, initial-scale=1">
     <title>{{ title }}</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="/javascripts/reqwest.min.js"></script>
+    
+
   </head>
   <body>
     <div>
@@ -12,13 +15,15 @@
       <!-- <a href="/auth/twitter"><img src="/img/sign-in-with-twitter-gray.png" alt="sign in with Twitter"></a> -->
     </div>
     <section class="center">
-      <form method="post" action="/search">
-        <input type="text" name="searchInput" placeholder="Command the AllSpark. Knowledge awaits.">
+      <form >
+        <input type="text" class="commandBox" name="searchInput" placeholder="Command the AllSpark. Knowledge awaits.">
         <input type="submit" value="Submit">
         or query at +1 (215) 302-9514
       </form>
+      <div class="results">
+        
+      </div>
     </section>
+    <script src="/javascripts/commandForm.js"></script>
   </body>
 </html>
-
-<!DOCTYPE html>
