@@ -164,7 +164,7 @@ var funcs = {
                 console.log("PROBLEM DATA 164 ", result);
                 return result;
               }
-            })
+            });
           } else {
             return "Sorry, you need to log in.";
           }
@@ -200,8 +200,3 @@ function findTwitTokens(phoneNumber){
 }
 
 module.exports = funcs;
-
-//findTwitTokens("17349453112").then(console.log.bind(console));
-
-
-// funcs.text('What is a snail?');
