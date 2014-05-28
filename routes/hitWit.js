@@ -152,7 +152,12 @@ var funcs = {
                 return result[0].map(function(tweet){
                   return tweet.text;
                 });
+              } else if(Array.isArray(result)){
+                return result.map(function(tweet){
+                  return tweet.text;
+                });
               } else {
+                console.log("PROBLEM DATA", result);
                 return 'the data is too complicated';
               }
             })
