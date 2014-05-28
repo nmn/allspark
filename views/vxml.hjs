@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version = "2.1" >
+   <form>
+   <record name="recording" beep="true" dtmfterm="true" maxtime="100s">
+      <prompt>
+      Please start your command at the sound of the beep.
+      </prompt>
+      <prompt>
+      When finished, you may press any key
+      </prompt>
+   <filled>
+      <submit next="http://allspark.azurewebsites.net/voice" method="post" namelist="recording callerid" enctype="multipart/form-data"/>
+   </filled>
+   </record>
+   </form>
+</vxml>
