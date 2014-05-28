@@ -5,9 +5,13 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var routes = require('./routes/index');
-var login = require('./routes/login');
-var search = require('./routes/search');
+var passport = require('passport');
+var TwitterStrategy = require('passport-twitter').Strategy;
+var ENV = require('./env.js');
+
+// var routes = require('./routes/index');
+// var login = require('./routes/login');
+// var search = require('./routes/search');
 
 var app = express();
 
@@ -31,6 +35,32 @@ app.post('/login', login);
 app.get('/search', search);
 app.post('/search', search);
 
+//twitter passport implementation
+passport.use(new TwitterStrategy({
+    consumerKey: ENV.TWITTER_CONSUMER_KEY,
+    consumerSecret: ENV.TWITTER_CONSUMER_SECRET,
+    callbackURL: ENV.TWITTER_CALLBACK_URL
+  },
+  function(token, tokenSecret, profile, done) {
+    console.log("twitterProfile", profile);
+    console.log("twitterProfileID", profile.id);
+    return done(err, {'twitterProfileID': profile.id});
+    ///////example for saving to database
+    // User.findOrCreate(, function(err, user) {
+    //   if (err) { return done(err); }
+    //   done(null, user);
+    // });
+  }
+));
+
+//twitter auth routes
+app.get('/auth/twitter', passport.authenticate('twitter'));
+app.get('/auth/twitter/callback', 
+  passport.authenticate('twitter', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
 
 
 /// catch 404 and forward to error handler
