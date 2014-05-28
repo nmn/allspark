@@ -77,7 +77,7 @@ var funcs = {
               return "Sorry an Error occurred. Try again later";
             });
           } else if(req.session.passport && req.session.passport.user) {
-            return twitter[outcome.intent](req.session.passport.user.token, req.session.passport.user.tokenSecret userId, (outcome.entities.number ? outcome.entities.number.body : 0));
+            return twitter[outcome.intent](req.session.passport.user.token, req.session.passport.user.tokenSecret, userId, (outcome.entities.number ? outcome.entities.number.body : 0));
           } else {
             return "Sorry, you need to log in.";
           }

@@ -3,7 +3,7 @@ var nexmo = require('nexmoapi').Nexmo;
 
 //var ENV = require('../env.js');
 
-var sender = new nexmo(process.env.NEXMO_KEY || ENV.NEXMO_KEY, process.env.NEXMO_SECRET || ENV.NEXMO_SECRET);
+var sender = new nexmo(process.env.NEXMO_KEY, process.env.NEXMO_SECRET);
 
 module.exports = Promise.promisify(sender.send.bind(sender));
 
