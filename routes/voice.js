@@ -4,6 +4,7 @@ var Promise = require('bluebird');
 
 
 module.exports = function(req,res){
+  console.log("asdf");
   console.log("query",req);
   var path = req.files.recording.path;
 
