@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var request = require('request');
 
+
 router.post('/search', function(req, res) {
 
   console.log("query", req.body.searchInput);
@@ -26,7 +27,7 @@ router.post('/search', function(req, res) {
         wolfram(data);
       }
     }
-    console.log(data);
+    //console.log(data);
   })
 
   res.send('got data');

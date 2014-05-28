@@ -19,6 +19,7 @@
     "static-favicon": "~1.0.0",
     "express-session": "^1.2.1",
     "orchestrate": "^0.1.2",
-    "twit": "^1.1.15"
+    "twit": "^1.1.15",
+    "nexmoapi": "^2.0.1"
   }
 }
