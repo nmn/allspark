@@ -1,6 +1,24 @@
 <!DOCTYPE html>
-<form method="post" action="/search">
-  Your wish is my command:
-  <input type="text" name="searchInput">
-  <input type="submit" value="Submit">
-</form>
+<html>
+  <head>
+    <meta name="viewport" content="width=500, initial-scale=1">
+    <title>{{ title }}</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div>
+      <!-- <div class="logo"></div> -->
+      <h1>Welcome to the AllSpark</h1>
+      <!-- <a href="/auth/twitter"><img src="/img/sign-in-with-twitter-gray.png" alt="sign in with Twitter"></a> -->
+    </div>
+    <section class="center">
+      <form method="post" action="/search">
+        <input type="text" name="searchInput" placeholder="Command the AllSpark. Knowledge awaits.">
+        <input type="submit" value="Submit">
+        or query at +1 (215) 302-9514
+      </form>
+    </section>
+  </body>
+</html>
+
+<!DOCTYPE html>

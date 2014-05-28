@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta name="viewport" content="width=500, initial-scale=1">
     <title>{{ title }}</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1>{{ title }}</h1>
-    <p>Login with Twitter:
-      <a href="/auth/twitter"><img src="/img/sign-in-with-twitter-gray.png"></a>
-    </p>
+    <section class="center">
+      <div>
+        <div class="logo"></div>
+        <h1>Welcome to the AllSpark</h1>
+        <a href="/auth/twitter"><img src="/img/sign-in-with-twitter-gray.png" alt="sign in with Twitter"></a>
+      </div>
+    </section>
   </body>
 </html>

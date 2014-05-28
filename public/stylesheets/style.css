@@ -1,7 +1,215 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-weight: inherit;
+  font-style: inherit;
+  font-family: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
 }
-a {
-  color: #00b7ff;
+body {
+  line-height: 1;
+  color: #000;
+  background: #fff;
+}
+ol,
+ul {
+  list-style: none;
+}
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  vertical-align: middle;
+}
+caption,
+th,
+td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+a img {
+  border: none;
+}
+*, *:before, *:after {
+  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  min-height: 100%;
+  background: #000;
+}
+section.center {
+  height: 100%;
+  font-size: 0;
+  text-align: center;
+}
+section.center::before {
+  content: '';
+  display: inline-block;
+  width: 0;
+  height: 100%;
+  vertical-align: middle;
+}
+section.center > form {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 1rem;
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+  color: #78aafa;
+  max-width: 500px;
+  text-align: left;
+  padding: 2rem;
+  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-weight: 200;
+}
+section.center > form input[type='text'] {
+  border: 1px solid rgba(120,170,250,0.75);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: transparent;
+  color: rgba(120,170,250,0.75);
+  width: 100%;
+  height: 3rem;
+  padding: 0 0.5rem;
+}
+section.center > form input[type='text']:focus {
+  border: 1px solid #78aafa;
+  color: #78aafa;
+}
+section.center > form input[type='submit'] {
+  height: 3rem;
+  border: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: #78aafa;
+  padding: 0 2rem;
+  position: relative;
+  left: -2px;
+}
+section.center > div {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 1rem;
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+}
+section.center > div .logo {
+  display: inline-block;
+  width: 25%;
+  padding-bottom: 25%;
+  border: 2px solid rgba(120,170,250,0.8);
+  -webkit-box-shadow: 0 0 2px rgba(120,170,250,0.8);
+  box-shadow: 0 0 2px rgba(120,170,250,0.8);
+  -webkit-transition: 0.5s ease;
+  -moz-transition: 0.5s ease;
+  -o-transition: 0.5s ease;
+  -ms-transition: 0.5s ease;
+  transition: 0.5s ease;
+  -webkit-transform: scale(0.55) rotate(45deg);
+  -moz-transform: scale(0.55) rotate(45deg);
+  -o-transform: scale(0.55) rotate(45deg);
+  -ms-transform: scale(0.55) rotate(45deg);
+  transform: scale(0.55) rotate(45deg);
+}
+@media screen and (max-width: 56rem) {
+  section.center > div .logo {
+    width: 40%;
+    padding-bottom: 40%;
+  }
+}
+section.center > div .logo:hover {
+  -webkit-transform: scale(0.65) rotate(40deg);
+  -moz-transform: scale(0.65) rotate(40deg);
+  -o-transform: scale(0.65) rotate(40deg);
+  -ms-transform: scale(0.65) rotate(40deg);
+  transform: scale(0.65) rotate(40deg);
+}
+section.center > div h1 {
+  color: #78aafa;
+  margin: 1rem;
+  font-size: 2rem;
+  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-weight: 100;
+}
+section.center > div img {
+  opacity: 0.6;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=60)";
+  filter: alpha(opacity=60);
+  -webkit-transition: 0.5s ease;
+  -moz-transition: 0.5s ease;
+  -o-transition: 0.5s ease;
+  -ms-transition: 0.5s ease;
+  transition: 0.5s ease;
+}
+section.center > div img:hover {
+  opacity: 1;
+  -ms-filter: none;
+  filter: none;
 }
