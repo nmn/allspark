@@ -4,7 +4,7 @@ var Promise = require('bluebird');
 
 
 module.exports = function(req,res){
-  console.log("query",req.query);
+  console.log("query",req);
   var path = req.files.recording.path;
 
   // hitWit.voice(path).then(function(response){
