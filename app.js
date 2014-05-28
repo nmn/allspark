@@ -10,7 +10,7 @@ var twitterService = require('./actions/twitter');
 var passport = require('passport');
 var TwitterStrategy = require('passport-twitter').Strategy;
 
-var ENV = require('./env.js');
+//var ENV = require('./env.js');
 
 var routes = require('./routes/index');
 var login = require('./routes/login');
@@ -79,7 +79,7 @@ app.get('/tweet/homeTimeline', function(req,res){
 app.get('/tweet/userTimeline', function(req,res){
   if(req.session.passport && req.session.passport.user){
     twitterService.getUserTimeline(
-      req.session.passport.user.token, 
+      req.session.passport.user.token,
       req.session.passport.user.tokenSecret,
       req.session.passport.user.id, 4)
     .then(function(response){

@@ -7,8 +7,12 @@ module.exports = function(req, res){
   var userNumber = req.query.msisdn;
   var ourNumber = req.query.to;
 
-  hitWit.text(text).then(function(response){
-    return nexmoSend(ourNumber, userNumber, response);
+  hitWit.text(text,userNumber).then(function(response){
+    if(typeof response === 'string') {
+      return nexmoSend(ourNumber, userNumber, response);
+    } else {
+      return nexmoSend(ourNumber, userNumber, "Tweets will be here");
+    }
   })
   .catch(function(err){
     console.warn(err);
