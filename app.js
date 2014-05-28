@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 
 var passport = require('passport');
 var TwitterStrategy = require('passport-twitter').Strategy;
-var ENV = require('./env.js');
+var env = require('./env.js');
 
 var routes = require('./routes/index');
 var login = require('./routes/login');
@@ -37,9 +37,9 @@ app.post('/search', search);
 
 //twitter passport implementation
 passport.use(new TwitterStrategy({
-    consumerKey: ENV.TWITTER_CONSUMER_KEY,
-    consumerSecret: ENV.TWITTER_CONSUMER_SECRET,
-    callbackURL: ENV.TWITTER_CALLBACK_URL
+    consumerKey: process.env.TWITTER_CONSUMER_KEY || env.TWITTER_CONSUMER_KEY,
+    consumerSecret: process.env.TWITTER_CONSUMER_SECRET || env.TWITTER_CONSUMER_SECRET,
+    callbackURL: process.env.TWITTER_CALLBACK_URL || env.TWITTER_CALLBACK_URL
   },
   function(token, tokenSecret, profile, done) {
     console.log("twitterProfile", profile);
