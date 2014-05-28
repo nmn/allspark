@@ -3,15 +3,19 @@ var path = require('path');
 var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+var session = require('express-session');
 var bodyParser = require('body-parser');
 
 var passport = require('passport');
 var TwitterStrategy = require('passport-twitter').Strategy;
 var ENV = require('./env.js');
+var Twit = require('twit');
 
-// var routes = require('./routes/index');
-// var login = require('./routes/login');
-// var search = require('./routes/search');
+var routes = require('./routes/index');
+var login = require('./routes/login');
+var search = require('./routes/search');
+
+var db = require('orchestrate')(ENV.ORCHESTRATE_TOKEN);
 
 var app = express();
 
@@ -28,6 +32,9 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({secret:"namanLikesPakwan"}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.get('/', routes);
 app.get('/login', login);
@@ -35,23 +42,50 @@ app.post('/login', login);
 app.get('/search', search);
 app.post('/search', search);
 
+app.get('/tweet/testers', function(req, res){
+  var userToken = req.session.passport.user.token;
+  var tokenSecret = req.session.passport.user.tokenSecret;
+});
+
+///////////here is how you get the token and token secret out of the session
+// app.get('/session/profile/test', function(req, res){
+  // res.send(req.session.passport.user.token);
+// });
+
 //twitter passport implementation
 passport.use(new TwitterStrategy({
-    consumerKey: ENV.TWITTER_CONSUMER_KEY,
-    consumerSecret: ENV.TWITTER_CONSUMER_SECRET,
-    callbackURL: ENV.TWITTER_CALLBACK_URL
+  consumerKey: ENV.TWITTER_CONSUMER_KEY,
+  consumerSecret: ENV.TWITTER_CONSUMER_SECRET,
+  callbackURL: ENV.TWITTER_CALLBACK_URL
   },
   function(token, tokenSecret, profile, done) {
-    console.log("twitterProfile", profile);
-    console.log("twitterProfileID", profile.id);
-    return done(err, {'twitterProfileID': profile.id});
-    ///////example for saving to database
-    // User.findOrCreate(, function(err, user) {
-    //   if (err) { return done(err); }
-    //   done(null, user);
-    // });
+    // console.log("twitterProfile", profile);
+    // console.log("twitterProfileID", profile.id);
+    console.log('token', token);
+    console.log('tokenSecret ', tokenSecret);
+    console.log('consumerSecret', ENV.TWITTER_CONSUMER_SECRET);
+
+    profile.token = token;
+    profile.tokenSecret = tokenSecret;
+    db.put('users', profile.id, profile)
+    .then(function(result){
+        done(null, profile);
+    })
+    .fail(done);
   }
 ));
+
+
+//serialize user cheat code to use when not saving to a db
+passport.serializeUser(function(user, done) {
+    // console.log('serializer log', arguments);
+  done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+    // console.log('deserializer log', arguments);
+  done(null, obj);
+});
 
 //twitter auth routes
 app.get('/auth/twitter', passport.authenticate('twitter'));
@@ -75,23 +109,23 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
-        res.status(err.status || 500);
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
+  app.use(function(err, req, res, next) {
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: err
     });
+  });
 }
 
 // production error handler
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
+  res.status(err.status || 500);
+  res.render('error', {
+    message: err.message,
+    error: {}
+  });
 });
 
 var server = app.listen(app.get('port'), function() {
