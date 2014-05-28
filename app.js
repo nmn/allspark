@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 
 var passport = require('passport');
 var TwitterStrategy = require('passport-twitter').Strategy;
-var env = require('./env.js');
+//var env = require('./env.js');
 
 var routes = require('./routes/index');
 var login = require('./routes/login');
