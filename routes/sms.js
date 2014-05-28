@@ -12,11 +12,15 @@ module.exports = function(req, res){
     if(typeof response === 'string') {
       return nexmoSend(ourNumber, userNumber, response);
     } else if(Array.isArray(response) && typeof response[0] === 'string') {
-      return (new Promise(function(resolve, reject){
-        resolve(response);
-      })).map(function(tweet){
+      // return (new Promise(function(resolve, reject){
+      //   resolve(response);
+      // })).map(function(tweet){
+      //   return nexmoSend(ourNumber, userNumber, tweet);
+      // });
+      var smses = response.map(function(tweet){
         return nexmoSend(ourNumber, userNumber, tweet);
       });
+      return Promise.all(smses);
     }
   })
   .catch(function(err){
