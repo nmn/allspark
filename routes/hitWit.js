@@ -95,7 +95,7 @@ var funcs = {
                       return tweet.text;
                     });
                   } else {
-                    console.log('Problem Data?', result);
+                    console.log('Problem Data? 98', result);
                     return 'the data is too complicated';
                   }
                 });
@@ -111,11 +111,11 @@ var funcs = {
                   return tweet.text;
                 });
               } else {
+                console.log('Problem Data? 114', result);
                 return 'the data is too complicated';
               }
             });
           } else {
-            console.log('Problem Data?', result);
             return "Sorry, you need to log in.";
           }
         }
@@ -131,7 +131,7 @@ var funcs = {
                       return tweet.text;
                     });
                   } else {
-                    console.log('Problem Data?', result);
+                    console.log('Problem Data? 134 ', result);
                     return 'the data is too complicated';
                   }
                 });
@@ -142,6 +142,7 @@ var funcs = {
                   return tweet.text;
                 });
               } else {
+                console.log('Problem Data? 145 ', result);
                 return 'the data is too complicated';
               }
             })
@@ -160,7 +161,7 @@ var funcs = {
                   return tweet.text;
                 });
               } else {
-                console.log("PROBLEM DATA", result);
+                console.log("PROBLEM DATA 164 ", result);
                 return 'the data is too complicated';
               }
             })
