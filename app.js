@@ -10,10 +10,11 @@ var twitterService = require('./actions/twitter');
 var passport = require('passport');
 var TwitterStrategy = require('passport-twitter').Strategy;
 
-var ENV = require('./env.js');
+//var ENV = require('./env.js');
 
 var routes = require('./routes/index');
 var login = require('./routes/login');
+var search = require('./routes/search');
 var sms = require('./routes/sms');
 var nexmo = require('./routes/nexmo');
 
@@ -42,7 +43,7 @@ app.get('/', routes);
 app.get('/login', login);
 app.post('/login', login);
 app.get('/sms', sms);
-//app.post('/search', search);
+app.post('/search', search);
 app.post('/nexmo', nexmo);
 
 app.get('/tweet/postStatus', function(req,res){
@@ -78,7 +79,7 @@ app.get('/tweet/homeTimeline', function(req,res){
 app.get('/tweet/userTimeline', function(req,res){
   if(req.session.passport && req.session.passport.user){
     twitterService.getUserTimeline(
-      req.session.passport.user.token, 
+      req.session.passport.user.token,
       req.session.passport.user.tokenSecret,
       req.session.passport.user.id, 4)
     .then(function(response){

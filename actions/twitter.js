@@ -1,13 +1,13 @@
 var Twit = require('twit');
-var ENV = require('../env');
+//var ENV = require('../env');
 var Promise = require('bluebird');
 // Twit = Promise.promisifyAll('Twit');
 
 module.exports = {
-  postTweet: function(token, tokenSecret, tweetMessage){
+  tweet: function(token, tokenSecret, tweetMessage){
     var T = new Twit({
-      consumer_key: ENV.TWITTER_CONSUMER_KEY,
-      consumer_secret: ENV.TWITTER_CONSUMER_SECRET,
+      consumer_key: process.env.TWITTER_CONSUMER_KEY,
+      consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
       access_token: token,
       access_token_secret: tokenSecret
     });
@@ -16,11 +16,11 @@ module.exports = {
     return T.postAsync('statuses/update', { status: tweetMessage});
   },
 
-  getHomeTimeline: function(token, tokenSecret, numTweets){
+  twitter_timeline: function(token, tokenSecret, numTweets){
     numTweets = (numTweets && numTweets > 0) ? numTweets : 3;
     var T = new Twit({
-      consumer_key: ENV.TWITTER_CONSUMER_KEY,
-      consumer_secret: ENV.TWITTER_CONSUMER_SECRET,
+      consumer_key: process.env.TWITTER_CONSUMER_KEY,
+      consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
       access_token: token,
       access_token_secret: tokenSecret
     });
@@ -28,11 +28,11 @@ module.exports = {
     return T.getAsync('statuses/home_timeline', {count:numTweets});
   },
 
-    getUserTimeline: function(token, tokenSecret, userId, numTweets){
+    read_tweets: function(token, tokenSecret, userId, numTweets){
     numTweets = (numTweets && numTweets > 0) ? numTweets : 3;
     var T = new Twit({
-      consumer_key: ENV.TWITTER_CONSUMER_KEY,
-      consumer_secret: ENV.TWITTER_CONSUMER_SECRET,
+      consumer_key: process.env.TWITTER_CONSUMER_KEY,
+      consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
       access_token: token,
       access_token_secret: tokenSecret
     });
