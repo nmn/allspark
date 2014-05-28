@@ -31,7 +31,7 @@ var funcs = {
 
     } else {
 
-      apiRequest = fs.readFileAsync(__dirname + text).then(function(audioFile){
+      apiRequest = fs.readFileAsync(__dirname + '\\' + text).then(function(audioFile){
         options.body = audioFile;
         return post({
           url:  'https://api.wit.ai/speech',
