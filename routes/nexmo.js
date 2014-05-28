@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var nexmo = require('nexmoapi').Nexmo;
 
-//var ENV = require('../env.js');
+var ENV = require('../env.js');
 
 var sender = new nexmo(process.env.NEXMO_KEY || ENV.NEXMO_KEY, process.env.NEXMO_SECRET || ENV.NEXMO_SECRET);
 
