@@ -6,9 +6,12 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
+var login = require('./routes/login');
+var search = require('./routes/search');
 
 var app = express();
+
+app.set('port', process.env.PORT || 3000);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,8 +25,11 @@ app.use(cookieParser());
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
-app.use('/users', users);
+app.get('/', routes);
+app.use('/login', login);
+app.post('/search', search);
+
+
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -56,5 +62,8 @@ app.use(function(err, req, res, next) {
     });
 });
 
+var server = app.listen(app.get('port'), function() {
+  console.log('Express server listening on port ' + server.address().port);
+});
 
-module.exports = app;
+// module.exports = app;
