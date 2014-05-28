@@ -5,12 +5,12 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
+var twitterService = require('./actions/twitter');
 
 var passport = require('passport');
 var TwitterStrategy = require('passport-twitter').Strategy;
 
 var ENV = require('./env.js');
-var Twit = require('twit');
 
 var routes = require('./routes/index');
 var login = require('./routes/login');
@@ -43,22 +43,52 @@ app.post('/login', login);
 app.get('/search', search);
 app.post('/search', search);
 
-app.get('/tweet/testers', function(req, res){
-  var userToken = req.session.passport.user.token;
-  var tokenSecret = req.session.passport.user.tokenSecret;
+app.get('/tweet/postStatus', function(req,res){
+  if(req.session.passport && req.session.passport.user){
+    twitterService.postTweet(req.session.passport.user.token, req.session.passport.user.tokenSecret, 'jello whirled!')
+    .then(function(response){
+      console.log(response);
+      res.send(200);
+    })
+    .catch(console.log.bind(console));
+  } else {
+    // throw new Error('passport or passport.user were not defined during a call to the /tweet/postStatus route');
+    console.log('passport or passport.user were not defined during a call to the /tweet/postStatus route');
+    res.send(500);
+  }
+});
 
-  var T = new Twit({
-    consumer_key: ENV.TWITTER_CONSUMER_KEY,
-    consumer_secret: ENV.TWITTER_CONSUMER_SECRET,
-    access_token: userToken,
-    access_token_secret: tokenSecret
-  });
+app.get('/tweet/homeTimeline', function(req,res){
+  if(req.session.passport && req.session.passport.user){
+    twitterService.getHomeTimeline(req.session.passport.user.token, req.session.passport.user.tokenSecret, 2)
+    .then(function(response){
+      console.log(response);
+      res.send(200);
+    })
+    .catch(console.log.bind(console));
+  } else {
+    // throw new Error('passport or passport.user were not defined during a call to the /tweet/homeTimeline route');
+    console.log('passport or passport.user were not defined during a call to the /tweet/homeTimeline route');
+    res.send(500);
+  }
+});
 
-  T.post('statuses/update', { status: 'test post from APIConQuest!' }, function(err, data, response) {
-    console.log(data);
-    res.send(data);
-  });
-
+app.get('/tweet/userTimeline', function(req,res){
+  if(req.session.passport && req.session.passport.user){
+    twitterService.getUserTimeline(
+      req.session.passport.user.token, 
+      req.session.passport.user.tokenSecret,
+      req.session.passport.user.id, 4)
+    .then(function(response){
+      console.log(response);
+      res.send(200);
+    })
+    .catch(console.log.bind(console));
+  } else {
+    // throw new Error('passport or passport.user were not defined during a call to the /tweet/userTimeline route');
+    console.log('passport or passport.user were not defined during a call to the /tweet/userTimeline route');
+    res.send(500);
+  }
 });
 
 ///////////here is how you get the token and token secret out of the session
