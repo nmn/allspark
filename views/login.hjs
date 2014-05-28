@@ -6,7 +6,8 @@
   </head>
   <body>
     <h1>{{ title }}</h1>
-    <p>Welcome to Allspark</p>
-    <p>Please log in</p>
+    <p>Login with Twitter:
+      <img src="">
+    </p>
   </body>
 </html>

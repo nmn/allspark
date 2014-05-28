@@ -1,0 +1,5 @@
+<form method="post" action="/search">
+  Your wish is my command:
+  <input type="text" name="searchInput">
+  <input type="submit" value="Submit">
+</form>
