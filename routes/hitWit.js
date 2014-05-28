@@ -95,6 +95,7 @@ var funcs = {
                       return tweet.text;
                     });
                   } else {
+                    console.log('Problem Data?', result);
                     return 'the data is too complicated';
                   }
                 });
@@ -129,6 +130,7 @@ var funcs = {
                       return tweet.text;
                     });
                   } else {
+                    console.log('Problem Data?', result);
                     return 'the data is too complicated';
                   }
                 });
