@@ -21,6 +21,8 @@ module.exports = function(req, res){
         return nexmoSend(ourNumber, userNumber, tweet);
       });
       return Promise.all(smses);
+    } else {
+      return nexmoSend(ourNumber, userNumber, 'Some strange error occurred');
     }
   })
   .catch(function(err){
