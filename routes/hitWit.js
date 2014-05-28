@@ -96,7 +96,7 @@ var funcs = {
                     });
                   } else {
                     console.log('Problem Data? 98', result);
-                    return 'the data is too complicated';
+                    return result;
                   }
                 });
             })
@@ -112,7 +112,7 @@ var funcs = {
                 });
               } else {
                 console.log('Problem Data? 114', result);
-                return 'the data is too complicated';
+                return result;
               }
             });
           } else {
@@ -132,7 +132,7 @@ var funcs = {
                     });
                   } else {
                     console.log('Problem Data? 134 ', result);
-                    return 'the data is too complicated';
+                    return result;
                   }
                 });
             })
@@ -143,7 +143,7 @@ var funcs = {
                 });
               } else {
                 console.log('Problem Data? 145 ', result);
-                return 'the data is too complicated';
+                return result;
               }
             })
             .catch(function(err){
@@ -162,7 +162,7 @@ var funcs = {
                 });
               } else {
                 console.log("PROBLEM DATA 164 ", result);
-                return 'the data is too complicated';
+                return result;
               }
             })
           } else {
