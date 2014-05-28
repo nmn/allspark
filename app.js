@@ -45,6 +45,19 @@ app.post('/search', search);
 app.get('/tweet/testers', function(req, res){
   var userToken = req.session.passport.user.token;
   var tokenSecret = req.session.passport.user.tokenSecret;
+
+  var T = new Twit({
+    consumer_key: ENV.TWITTER_CONSUMER_KEY,
+    consumer_secret: ENV.TWITTER_CONSUMER_SECRET,
+    access_token: userToken,
+    access_token_secret: tokenSecret
+  });
+
+  T.post('statuses/update', { status: 'test post from APIConQuest!' }, function(err, data, response) {
+    console.log(data);
+    res.send(data);
+  });
+
 });
 
 ///////////here is how you get the token and token secret out of the session
