@@ -2,8 +2,13 @@
 <vxml version = "2.1" >
       <form>
         <block>
+         {{#prompts}}
          <prompt>
-            Please hang up now.
+            {{message}}
+         </prompt>
+         {{/prompts}}
+         <prompt>
+            Thanks for talking to the All Spark. You may hang up now.
          </prompt>
         </block>
       </form>

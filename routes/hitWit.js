@@ -140,7 +140,9 @@ var funcs = {
   },
 
   'voice': function(path){
-
+    return new Promise(function(resolve, reject){
+      resolve("Hey this will be an answer...");
+    });
   }
 
 };

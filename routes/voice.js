@@ -9,21 +9,30 @@ module.exports = function(req,res){
   var ourNumber = '12153029514';
   var path = req.files.recording.path;
 
-  // hitWit.voice(path).then(function(response){
-  //   if(typeof response === 'string') {
-  //     return nexmoSend(ourNumber, userNumber, response);
-  //   } else if(Array.isArray(response) && typeof response[0] === 'string') {
-  //     return (new Promise(function(resolve, reject){
-  //       resolve(response);
-  //     })).map(function(tweet){
-  //       return nexmoSend(ourNumber, userNumber, tweet);
-  //     });
-  //   }
-  // })
-  // .catch(function(err){
-  //   console.warn(err);
-  // });
-console.log(userNumber,path);
   res.set('content-type', 'text/xml');
-  res.render('vxmlresponse',{});
-}
+  hitWit.voice(path).then(function(response){
+    if(typeof response === 'string') {
+      return res.render('vxmlresponse',{prompts : [
+        {message: response}
+      ]});
+      //nexmoSend(ourNumber, userNumber, response);
+    } else if(Array.isArray(response) && typeof response[0] === 'string') {
+      var messages = response.map(function(prompt){
+        return {message: prompt};
+      });
+      return res.render('vxmlresponse',{prompts : messages});
+      // return (new Promise(function(resolve, reject){
+      //   resolve(response);
+      // })).map(function(tweet){
+      //   return nexmoSend(ourNumber, userNumber, tweet);
+      // });
+    }
+  })
+  .catch(function(err){
+    return res.render('vxmlresponse',{prompts : [
+      {message: "Sorry an error occurred."}
+    ]});
+  });
+
+  console.log(userNumber,path);
+};
