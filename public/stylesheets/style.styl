@@ -33,6 +33,17 @@ section.center
   text-align center
   perspective 800px
   perspective-origin 50% 50%
+  .results
+    position absolute
+    left 0
+    right 0
+    bottom 10rem
+    text-align center
+    font-size 2rem
+    color white
+    opacity 0.9
+    font-family 'Helvetica Neue', Helvetica, sans-serif
+    font-weight 100
   &::before
     content ''
     display inline-block
@@ -163,7 +174,7 @@ section.center
         width 40%
         padding-bottom 40%
       &:hover
-        transform scale(0.65) translateX(-20%) translateY(20%) rotateX(30deg) rotateY(30deg)
+        transform scale(0.55) translateX(-20%) translateY(20%) rotateX(30deg) rotateY(30deg)
     h1
       color rgba(120,170,250, 1)
       margin 1rem

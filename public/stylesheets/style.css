@@ -113,6 +113,20 @@ section.center {
   -ms-perspective-origin: 50% 50%;
   perspective-origin: 50% 50%;
 }
+section.center .results {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 10rem;
+  text-align: center;
+  font-size: 2rem;
+  color: #fff;
+  opacity: 0.9;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+  filter: alpha(opacity=90);
+  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-weight: 100;
+}
 section.center::before {
   content: '';
   display: inline-block;
@@ -360,11 +374,11 @@ section.center > div .logo .right {
   }
 }
 section.center > div .logo:hover {
-  -webkit-transform: scale(0.65) translateX(-20%) translateY(20%) rotateX(30deg) rotateY(30deg);
-  -moz-transform: scale(0.65) translateX(-20%) translateY(20%) rotateX(30deg) rotateY(30deg);
-  -o-transform: scale(0.65) translateX(-20%) translateY(20%) rotateX(30deg) rotateY(30deg);
-  -ms-transform: scale(0.65) translateX(-20%) translateY(20%) rotateX(30deg) rotateY(30deg);
-  transform: scale(0.65) translateX(-20%) translateY(20%) rotateX(30deg) rotateY(30deg);
+  -webkit-transform: scale(0.55) translateX(-20%) translateY(20%) rotateX(30deg) rotateY(30deg);
+  -moz-transform: scale(0.55) translateX(-20%) translateY(20%) rotateX(30deg) rotateY(30deg);
+  -o-transform: scale(0.55) translateX(-20%) translateY(20%) rotateX(30deg) rotateY(30deg);
+  -ms-transform: scale(0.55) translateX(-20%) translateY(20%) rotateX(30deg) rotateY(30deg);
+  transform: scale(0.55) translateX(-20%) translateY(20%) rotateX(30deg) rotateY(30deg);
 }
 section.center > div h1 {
   color: #78aafa;

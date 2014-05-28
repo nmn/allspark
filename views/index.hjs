@@ -23,7 +23,7 @@
           <span>Show me my last 3 tweets</span>
           <span>What's happening on Twitter?</span>
         </div>
-        <input type="text" name="searchInput" placeholder="Command the AllSpark. Knowledge awaits.">
+        <input type="text" name="searchInput" class="commandBox" placeholder="Command the AllSpark. Knowledge awaits.">
         <input type="submit" value="Submit">
         or query at +1 (215) 302-9514
       </form>
