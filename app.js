@@ -111,7 +111,7 @@ passport.use(new TwitterStrategy({
     // console.log("twitterProfileID", profile.id);
     console.log('token', token);
     console.log('tokenSecret ', tokenSecret);
-    console.log('consumerSecret', ENV.TWITTER_CONSUMER_SECRET);
+    console.log('consumerSecret', process.env.TWITTER_CONSUMER_SECRET);
 
     profile.token = token;
     profile.tokenSecret = tokenSecret;

@@ -9,7 +9,7 @@ request = Promise.promisify(request);
 var wolfram = require('./../actions/wolfram');
 
 var funcs = {
-  'text': function(text, userNumber) {
+  'text': function(text, userNumber, session) {
 
     console.log("query", text);
 
@@ -46,8 +46,12 @@ var funcs = {
             .catch(function(err){
               return "Sorry an Error occurred. Try again later";
             });
-          } else if(req.session.passport && req.session.passport.user) {
-            return twitter[outcome.intent](req.session.passport.user.token, req.session.passport.user.tokenSecret, outcome.entities.message_body.body);
+          } else if(session && session.passport && session.passport.user) {
+            console.log("trying to tweet...", outcome.intent);
+            return twitter[outcome.intent](session.passport.user.token, session.passport.user.tokenSecret, outcome.entities.message_body.body)
+            .then(function(result){
+              return "New Tweet : " + outcome.entities.message_body.body;
+            });
           } else {
             return "Sorry, you need to log in.";
           }
@@ -56,13 +60,31 @@ var funcs = {
         case 'twitter_timeline': {
           if(userNumber) {
             return findTwitTokens(userNumber).spread(function(token,secret, userId){
-              return twitter[outcome.intent](token, secret, (outcome.entities.number ? outcome.entities.number.body : 0));
+              return twitter[outcome.intent](token, secret, (outcome.entities.number ? outcome.entities.number.body : 0))
+                .then(function(result){
+                  if(Array.isArray(result) && Array.isArray(result[0])){
+                    return result[0].map(function(tweet){
+                      return tweet.text;
+                    });
+                  } else {
+                    return 'the data is too complicated';
+                  }
+                });
             })
             .catch(function(err){
               return "Sorry an Error occurred. Try again later";
             });
-          } else if(req.session.passport && req.session.passport.user) {
-            return twitter[outcome.intent](req.session.passport.user.token, req.session.passport.user.tokenSecret, (outcome.entities.number ? outcome.entities.number.body : 0));
+          } else if(session && session.passport && session.passport.user) {
+            return twitter[outcome.intent](session.passport.user.token, session.passport.user.tokenSecret, (outcome.entities.number ? outcome.entities.number.body : 0))
+            .then(function(result){
+              if(Array.isArray(result) && Array.isArray(result[0])){
+                return result[0].map(function(tweet){
+                  return tweet.text;
+                });
+              } else {
+                return 'the data is too complicated';
+              }
+            });
           } else {
             return "Sorry, you need to log in.";
           }
@@ -71,13 +93,40 @@ var funcs = {
         case 'read_tweets': {
           if(userNumber) {
             return findTwitTokens(userNumber).spread(function(token,secret, userId){
-              return twitter[outcome.intent](token, secret, userId, (outcome.entities.number ? outcome.entities.number.body : 0));
+              return twitter[outcome.intent](token, secret, userId, (outcome.entities.number ? outcome.entities.number.body : 0))
+                .then(function(result){
+                  if(Array.isArray(result) && Array.isArray(result[0])){
+                    return result[0].map(function(tweet){
+                      return tweet.text;
+                    });
+                  } else {
+                    return 'the data is too complicated';
+                  }
+                });
+            })
+            .then(function(result){
+              if(Array.isArray(result) && Array.isArray(result[0])){
+                return result[0].map(function(tweet){
+                  return tweet.text;
+                });
+              } else {
+                return 'the data is too complicated';
+              }
             })
             .catch(function(err){
               return "Sorry an Error occurred. Try again later";
             });
-          } else if(req.session.passport && req.session.passport.user) {
-            return twitter[outcome.intent](req.session.passport.user.token, req.session.passport.user.tokenSecret userId, (outcome.entities.number ? outcome.entities.number.body : 0));
+          } else if(session && session.passport && session.passport.user) {
+            return twitter[outcome.intent](session.passport.user.token, session.passport.user.tokenSecret, session.passport.user.id, (outcome.entities.number ? outcome.entities.number.body : 0))
+            .then(function(result){
+              if(Array.isArray(result) && Array.isArray(result[0])){
+                return result[0].map(function(tweet){
+                  return tweet.text;
+                });
+              } else {
+                return 'the data is too complicated';
+              }
+            })
           } else {
             return "Sorry, you need to log in.";
           }

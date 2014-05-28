@@ -1,5 +1,6 @@
 var hitWit = require('./hitWit');
 var nexmoSend = require('./nexmo');
+var Promise = require('bluebird');
 
 module.exports = function(req, res){
   console.log(req.query.text);
@@ -10,8 +11,12 @@ module.exports = function(req, res){
   hitWit.text(text,userNumber).then(function(response){
     if(typeof response === 'string') {
       return nexmoSend(ourNumber, userNumber, response);
-    } else {
-      return nexmoSend(ourNumber, userNumber, "Tweets will be here");
+    } else if(Array.isArray(response) && typeof response[0] === 'string') {
+      return (new Promise(function(resolve, reject){
+        resolve(response);
+      })).map(function(tweet){
+        return nexmoSend(ourNumber, userNumber, tweet);
+      });
     }
   })
   .catch(function(err){
