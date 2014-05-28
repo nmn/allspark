@@ -71,6 +71,7 @@ var funcs = {
               return "New Tweet : " + outcome.entities.message_body.body;
             })
             .catch(function(err){
+              console.log("74 ERROR", err);
               return "Sorry an Error occurred. Try again later";
             });
           } else if(session && session.passport && session.passport.user) {
@@ -101,6 +102,7 @@ var funcs = {
                 });
             })
             .catch(function(err){
+              console.log("105 ERROR", err);
               return "Sorry an Error occurred. Try again later";
             });
           } else if(session && session.passport && session.passport.user) {
@@ -147,6 +149,7 @@ var funcs = {
               }
             })
             .catch(function(err){
+              console.log("152 ERROR", err);
               return "Sorry an Error occurred. Try again later";
             });
           } else if(session && session.passport && session.passport.user) {
