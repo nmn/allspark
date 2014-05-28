@@ -16,7 +16,7 @@ var routes = require('./routes/index');
 var login = require('./routes/login');
 var search = require('./routes/search');
 
-var db = require('orchestrate')(ENV.ORCHESTRATE_TOKEN);
+var db = require('orchestrate')(process.env.ORCHESTRATE_TOKEN || ENV.ORCHESTRATE_TOKEN);
 
 var app = express();
 
