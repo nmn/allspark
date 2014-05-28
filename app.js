@@ -3,15 +3,18 @@ var path = require('path');
 var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+var session = require('express-session');
 var bodyParser = require('body-parser');
 
 var passport = require('passport');
 var TwitterStrategy = require('passport-twitter').Strategy;
 var ENV = require('./env.js');
 
-// var routes = require('./routes/index');
-// var login = require('./routes/login');
-// var search = require('./routes/search');
+var routes = require('./routes/index');
+var login = require('./routes/login');
+var search = require('./routes/search');
+
+var db = require('orchestrate')(ENV.ORCHESTRATE_TOKEN);
 
 var app = express();
 
@@ -28,6 +31,9 @@ app.use(bodyParser.urlencoded());
 app.use(cookieParser());
 app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({secret:"namanLikesPakwan"}));
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.get('/', routes);
 app.get('/login', login);
@@ -42,16 +48,41 @@ passport.use(new TwitterStrategy({
     callbackURL: ENV.TWITTER_CALLBACK_URL
   },
   function(token, tokenSecret, profile, done) {
-    console.log("twitterProfile", profile);
-    console.log("twitterProfileID", profile.id);
-    return done(err, {'twitterProfileID': profile.id});
+    // console.log("twitterProfile", profile);
+    // console.log("twitterProfileID", profile.id);
+    console.log('token', token);
+    console.log('tokenSecret ', tokenSecret);
+    console.log('consumerSecret', ENV.TWITTER_CONSUMER_SECRET);
+    
+    //////use the following line if you are not using a data to store the profile
+    // done(null, profile);
+
     ///////example for saving to database
     // User.findOrCreate(, function(err, user) {
     //   if (err) { return done(err); }
     //   done(null, user);
     // });
+    profile.token = token;
+    profile.tokenSecret = tokenSecret;
+    db.put('users', profile.id, profile)
+    .then(function(result){
+        done(null, profile);
+    })
+    .fail(done);
   }
 ));
+
+
+//serialize user cheat code to use when not saving to a db
+passport.serializeUser(function(user, done) {
+    // console.log('serializer log', arguments);
+  done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+    // console.log('deserializer log', arguments);
+  done(null, obj);
+});
 
 //twitter auth routes
 app.get('/auth/twitter', passport.authenticate('twitter'));
