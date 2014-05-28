@@ -63,7 +63,8 @@ var funcs = {
           return (outcome.entities.wikipedia_search_query) ? wolfram(outcome.entities.wikipedia_search_query.body) : wolfram(outcome.entities.wolfram_search_query.body);
         case 'tweet': {
           if(userNumber) {
-            return findTwitTokens(userNumber).spread(function(token, secret, userId){
+            return findTwitTokens(userNumber).then(function(arg){
+              var token = arg[0], secret = arg[1], userId = arg[2];
               return twitter[outcome.intent](token, secret, outcome.entities.message_body.body);
             })
             .then(function(result){
@@ -85,7 +86,8 @@ var funcs = {
 
         case 'twitter_timeline': {
           if(userNumber) {
-            return findTwitTokens(userNumber).spread(function(token,secret, userId){
+            return findTwitTokens(userNumber).then(function(arg){
+              var token = arg[0], secret = arg[1], userId = arg[2];
               return twitter[outcome.intent](token, secret, (outcome.entities.number ? outcome.entities.number.body : 0))
                 .then(function(result){
                   if(Array.isArray(result) && Array.isArray(result[0])){
@@ -118,7 +120,8 @@ var funcs = {
 
         case 'read_tweets': {
           if(userNumber) {
-            return findTwitTokens(userNumber).spread(function(token,secret, userId){
+            return findTwitTokens(userNumber).then(function(arg){
+              var token = arg[0], secret = arg[1], userId = arg[2];
               return twitter[outcome.intent](token, secret, userId, (outcome.entities.number ? outcome.entities.number.body : 0))
                 .then(function(result){
                   if(Array.isArray(result) && Array.isArray(result[0])){
@@ -180,9 +183,7 @@ function findTwitTokens(phoneNumber){
     }
     user = user.body.results[0].value;
 
-    return new Promise(function(resolve, reject){
-      resolve([user.token, user.tokenSecret, user.id]);
-    });
+    return [user.token, user.tokenSecret, user.id];
   });
 }
 
