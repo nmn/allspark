@@ -4,8 +4,9 @@ var Promise = require('bluebird');
 
 
 module.exports = function(req,res){
-  console.log("asdf");
-  console.log("query",req);
+  var string = req.headers.referer;
+  var userNumber = string.match(/nexmo_caller_id=([0-9]+)&/)[1];
+  var ourNumber = '12153029514';
   var path = req.files.recording.path;
 
   // hitWit.voice(path).then(function(response){
@@ -22,9 +23,7 @@ module.exports = function(req,res){
   // .catch(function(err){
   //   console.warn(err);
   // });
-
-
-
+console.log(userNumber,path);
   res.set('content-type', 'text/xml');
   res.render('vxmlresponse',{});
 }
