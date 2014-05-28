@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<vxml version = "2.1" >
+      <form>
+        <block>
+          {{#prompts}}
+          <prompt>
+            {{message}}
+          </prompt>
+          {{/prompts}}
+          <prompt>
+             ....
+          </prompt>
+          <prompt>
+            ... Thanks for talking to the All Spark. You may hang up now.
+          </prompt>
+        </block>
+      </form>
+</vxml>

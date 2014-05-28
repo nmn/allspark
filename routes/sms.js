@@ -1,5 +1,6 @@
 var hitWit = require('./hitWit');
 var nexmoSend = require('./nexmo');
+var Promise = require('bluebird');
 
 module.exports = function(req, res){
   console.log(req.query.text);
@@ -10,8 +11,30 @@ module.exports = function(req, res){
   hitWit.text(text,userNumber).then(function(response){
     if(typeof response === 'string') {
       return nexmoSend(ourNumber, userNumber, response);
-    } else {
-      return nexmoSend(ourNumber, userNumber, "Tweets will be here");
+    } else if(Array.isArray(response)) {
+      response = response.filter(function(tweet){
+        return typeof tweet === 'string';
+      });
+      if(response.length > 1) {
+        // return (new Promise(function(resolve, reject){
+        //   resolve(response);
+        // })).map(function(tweet){
+        //   return nexmoSend(ourNumber, userNumber, tweet);
+        // });
+        var smses = [];
+        for(var i = 0; i < response.length; i++){
+          console.log('trying to send...', response[i]);
+          smses.push(nexmoSend(ourNumber, userNumber, response[i]));
+        }
+        return Promise.all(smses);
+      } else if (response.length === 1) {
+        nexmoSend(ourNumber, userNumber, response[0])
+      } else {
+        return nexmoSend(ourNumber, userNumber, 'Some strange error occurred');
+      }
+    }
+    else {
+      return nexmoSend(ourNumber, userNumber, 'Some strange error occurred');
     }
   })
   .catch(function(err){

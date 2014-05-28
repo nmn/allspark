@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var twitterService = require('./actions/twitter');
+var multer = require('multer');
 
 var passport = require('passport');
 var TwitterStrategy = require('passport-twitter').Strategy;
@@ -18,6 +19,8 @@ var login = require('./routes/login');
 var search = require('./routes/search');
 var sms = require('./routes/sms');
 var nexmo = require('./routes/nexmo');
+var voice = require('./routes/voice');
+
 
 var db = require('orchestrate')(process.env.ORCHESTRATE_TOKEN);
 
@@ -28,6 +31,8 @@ app.set('port', process.env.PORT || 3000);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hjs');
+
+app.use(multer({dest: './uploads/'}));
 
 app.use(favicon());
 app.use(logger('dev'));
@@ -46,6 +51,11 @@ app.post('/login', login);
 app.get('/sms', sms);
 app.post('/search', search);
 app.post('/nexmo', nexmo);
+app.get('/vxml', function(req,res){
+    res.set('content-type', 'text/xml');
+    res.render('vxml',{});
+});
+app.post('/voice', voice);
 
 //EVERNOTE
 // GET /auth/evernote
