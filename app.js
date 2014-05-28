@@ -14,9 +14,10 @@ var ENV = require('./env.js');
 
 var routes = require('./routes/index');
 var login = require('./routes/login');
-var search = require('./routes/search');
+var sms = require('./routes/sms');
+var nexmo = require('./routes/nexmo');
 
-var db = require('orchestrate')(ENV.ORCHESTRATE_TOKEN);
+var db = require('orchestrate')(process.env.ORCHESTRATE_TOKEN || ENV.ORCHESTRATE_TOKEN);
 
 var app = express();
 
@@ -40,8 +41,9 @@ app.use(passport.session());
 app.get('/', routes);
 app.get('/login', login);
 app.post('/login', login);
-app.get('/search', search);
-app.post('/search', search);
+app.get('/sms', sms);
+//app.post('/search', search);
+app.post('/nexmo', nexmo);
 
 app.get('/tweet/postStatus', function(req,res){
   if(req.session.passport && req.session.passport.user){
