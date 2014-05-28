@@ -148,11 +148,22 @@ passport.use(new TwitterStrategy({
 
     profile.token = token;
     profile.tokenSecret = tokenSecret;
-    db.put('users', profile.id, profile)
-    .then(function(result){
-        done(null, profile);
+    db.get('users', profile.id)
+    .then(function(saved){
+      if(!saved){
+        return db.put('users', profile.id, profile);
+      } else {
+        profile.phoneNumber = saved.phoneNumber;
+        return db.put('users', profile.id, profile);
+      }
     })
-    .fail(done);
+    .catch(function(){
+      return db.put('users', profile.id, profile);
+    })
+    .then(function(){
+      done(null, profile);
+    })
+    .catch(done);
   }
 ));
 

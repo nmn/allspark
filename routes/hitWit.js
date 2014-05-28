@@ -191,6 +191,7 @@ var funcs = {
 function findTwitTokens(phoneNumber){
   var p = db.search("users", phoneNumber).then(function(user){
     if(user.body.results.length < 1){
+      console.log('results for ', phoneNumber, user);
       throw new Error("can't decide");
     }
     user = user.body.results[0].value;
