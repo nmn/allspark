@@ -9,11 +9,12 @@ var bodyParser = require('body-parser');
 var passport = require('passport');
 var TwitterStrategy = require('passport-twitter').Strategy;
 
-var ENV = require('./env.js');
+//var ENV = require('./env.js');
 var Twit = require('twit');
 
 var routes = require('./routes/index');
 var login = require('./routes/login');
+var search = require('./routes/search');
 var sms = require('./routes/sms');
 var nexmo = require('./routes/nexmo');
 
@@ -42,7 +43,7 @@ app.get('/', routes);
 app.get('/login', login);
 app.post('/login', login);
 app.get('/sms', sms);
-//app.post('/search', search);
+app.post('/search', search);
 app.post('/nexmo', nexmo);
 
 app.get('/tweet/testers', function(req, res){

@@ -1,4 +1,4 @@
-var env = require('./../env.js');
+//var env = require('./../env.js');
 
 var Promise = require('bluebird');
 var request = require('request');
@@ -7,8 +7,10 @@ parseString = Promise.promisify(parseString);
 request = Promise.promisify(request);
 
 
-var searchWolfram = function (queryString) { 
-  return request('http://api.wolframalpha.com/v2/query?input='+ encodeURIComponent(queryString) +'&appid=' + env.WOLFRAM_ALPHA_TOKEN)
+var searchWolfram = function (queryString) {
+
+  console.log('reached wolfram', queryString);
+  return request('http://api.wolframalpha.com/v2/query?input='+ encodeURIComponent(queryString) +'&appid=' + process.env.WOLFRAM_ALPHA_TOKEN || env.WOLFRAM_ALPHA_TOKEN)
     .then(function (response, body) {
       //console.log('response', response[0].body);
       return parseString(response[0].body);
@@ -34,6 +36,7 @@ var searchWolfram = function (queryString) {
           }
         });
       }
+      console.log('returning from wolfram', result);
       return result;
     })
     .catch(console.log.bind(console, 'error: '));
