@@ -88,7 +88,7 @@ var funcs = {
           if(userNumber) {
             return findTwitTokens(userNumber).then(function(arg){
               var token = arg[0], secret = arg[1], userId = arg[2];
-              return twitter[outcome.intent](token, secret, (outcome.entities.number ? outcome.entities.number.body : 0))
+              return twitter[outcome.intent](token, secret, (outcome.entities.number ? outcome.entities.number.value : 0))
                 .then(function(result){
                   if(Array.isArray(result) && Array.isArray(result[0])){
                     return result[0].map(function(tweet){
@@ -104,7 +104,7 @@ var funcs = {
               return "Sorry an Error occurred. Try again later";
             });
           } else if(session && session.passport && session.passport.user) {
-            return twitter[outcome.intent](session.passport.user.token, session.passport.user.tokenSecret, (outcome.entities.number ? outcome.entities.number.body : 0))
+            return twitter[outcome.intent](session.passport.user.token, session.passport.user.tokenSecret, (outcome.entities.number ? outcome.entities.number.value : 0))
             .then(function(result){
               if(Array.isArray(result) && Array.isArray(result[0])){
                 return result[0].map(function(tweet){
@@ -124,7 +124,7 @@ var funcs = {
           if(userNumber) {
             return findTwitTokens(userNumber).then(function(arg){
               var token = arg[0], secret = arg[1], userId = arg[2];
-              return twitter[outcome.intent](token, secret, userId, (outcome.entities.number ? outcome.entities.number.body : 0))
+              return twitter[outcome.intent](token, secret, userId, (outcome.entities.number ? outcome.entities.number.value : 0))
                 .then(function(result){
                   if(Array.isArray(result) && Array.isArray(result[0])){
                     return result[0].map(function(tweet){
@@ -150,7 +150,7 @@ var funcs = {
               return "Sorry an Error occurred. Try again later";
             });
           } else if(session && session.passport && session.passport.user) {
-            return twitter[outcome.intent](session.passport.user.token, session.passport.user.tokenSecret, session.passport.user.id, (outcome.entities.number ? outcome.entities.number.body : 0))
+            return twitter[outcome.intent](session.passport.user.token, session.passport.user.tokenSecret, session.passport.user.id, (outcome.entities.number ? outcome.entities.number.value : 0))
             .then(function(result){
               if(Array.isArray(result) && Array.isArray(result[0])){
                 return result[0].map(function(tweet){
