@@ -177,13 +177,16 @@ var funcs = {
 };
 
 function findTwitTokens(phoneNumber){
-  return db.search("users", phoneNumber).then(function(user){
+  var p = db.search("users", phoneNumber).then(function(user){
     if(user.body.results.length < 1){
       throw new Error("can't decide");
     }
     user = user.body.results[0].value;
 
     return [user.token, user.tokenSecret, user.id];
+  });
+  return new Promise(function(resolve, reject){
+    resolve(p);
   });
 }
 
