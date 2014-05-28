@@ -13,7 +13,7 @@ module.exports = function(req,res){
   hitWit.text(path, userNumber, undefined, true).then(function(response){
     if(typeof response === 'string') {
       return res.render('vxmlresponse',{prompts : [
-        {message: response}
+        {message: 'The answer is ' + response}
       ]});
       //nexmoSend(ourNumber, userNumber, response);
     } else if(Array.isArray(response) && typeof response[0] === 'string') {
