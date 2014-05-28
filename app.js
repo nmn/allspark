@@ -10,7 +10,7 @@ var multer = require('multer');
 
 var passport = require('passport');
 var TwitterStrategy = require('passport-twitter').Strategy;
-var EvernoteStrategy = require('passport-evernote').Strategy;
+//var EvernoteStrategy = require('passport-evernote').Strategy;
 
 //var ENV = require('./env.js');
 
@@ -63,23 +63,23 @@ app.post('/voice', voice);
 //   request.  The first step in Evernote authentication will involve redirecting
 //   the user to evernote.com.  After authorization, Evernote will redirect the user
 //   back to this application at /auth/evernote/callback
-app.get('/auth/evernote',
-  passport.authenticate('evernote'),
-  function(req, res){
-    // The request will be redirected to Evernote for authentication, so this
-    // function will not be called.
-  });
+// app.get('/auth/evernote',
+//   passport.authenticate('evernote'),
+//   function(req, res){
+//     // The request will be redirected to Evernote for authentication, so this
+//     // function will not be called.
+//   });
 
 // GET /auth/evernote/callback
 //   Use passport.authenticate() as route middleware to authenticate the
 //   request.  If authentication fails, the user will be redirected back to the
 //   login page.  Otherwise, the primary route function function will be called,
 //   which, in this example, will redirect the user to the home page.
-app.get('/auth/evernote/callback', 
-  passport.authenticate('evernote', { failureRedirect: '/login' }),
-  function(req, res) {
-    res.redirect('/');
-  });
+// app.get('/auth/evernote/callback', 
+//   passport.authenticate('evernote', { failureRedirect: '/login' }),
+//   function(req, res) {
+//     res.redirect('/');
+//   });
 
 app.get('/tweet/postStatus', function(req,res){
   if(req.session.passport && req.session.passport.user){
@@ -156,24 +156,24 @@ passport.use(new TwitterStrategy({
   }
 ));
 
-passport.use(new EvernoteStrategy({
-    requestTokenURL: 'https://sandbox.evernote.com/oauth',
-    accessTokenURL: 'https://sandbox.evernote.com/oauth',
-    userAuthorizationURL: 'https://sandbox.evernote.com/OAuth.action',
-    consumerKey: process.env.EVERNOTE_CONSUMER_KEY,
-    consumerSecret: process.env.EVERNOTE_CONSUMER_SECRET,
-    callbackURL: process.env.EVERNOTE_CALLBACK_URL
-  },
-  function(token, tokenSecret, profile, done) {
-    console.log(profile);
-    // db.put('notes', )
-    db.put('notes', profile.id, profile)
-    .then(function(result){
-      done(null, profile);
-    })
-    .fail(done);
-  }
-));
+// passport.use(new EvernoteStrategy({
+//     requestTokenURL: 'https://sandbox.evernote.com/oauth',
+//     accessTokenURL: 'https://sandbox.evernote.com/oauth',
+//     userAuthorizationURL: 'https://sandbox.evernote.com/OAuth.action',
+//     consumerKey: process.env.EVERNOTE_CONSUMER_KEY,
+//     consumerSecret: process.env.EVERNOTE_CONSUMER_SECRET,
+//     callbackURL: process.env.EVERNOTE_CALLBACK_URL
+//   },
+//   function(token, tokenSecret, profile, done) {
+//     console.log(profile);
+//     // db.put('notes', )
+//     db.put('notes', profile.id, profile)
+//     .then(function(result){
+//       done(null, profile);
+//     })
+//     .fail(done);
+//   }
+// ));
 
 
 //serialize user cheat code to use when not saving to a db
