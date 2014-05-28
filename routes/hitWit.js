@@ -180,7 +180,9 @@ function findTwitTokens(phoneNumber){
     }
     user = user.body.results[0].value;
 
-    return [user.token, user.tokenSecret, user.id];
+    return new Promise(function(resolve, reject){
+      resolve([user.token, user.tokenSecret, user.id]);
+    });
   });
 }
 
