@@ -30,7 +30,7 @@ var funcs = {
       apiRequest = request(options);
 
     } else {
-
+      console.log('path is ', __dirname + '\\' + text);
       apiRequest = fs.readFileAsync(__dirname + '\\' + text).then(function(audioFile){
         options.body = audioFile;
         return post({
