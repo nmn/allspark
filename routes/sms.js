@@ -17,10 +17,11 @@ module.exports = function(req, res){
       // })).map(function(tweet){
       //   return nexmoSend(ourNumber, userNumber, tweet);
       // });
-      var smses = response.map(function(tweet){
-        console.log('trying to send...', tweet);
-        return nexmoSend(ourNumber, userNumber, tweet);
-      });
+      var smses = [];
+      for(var i = 0; i < response.length; i++){
+        console.log('trying to send...', response[i]);
+        smses.push(nexmoSend(ourNumber, userNumber, response[i]));
+      }
       return Promise.all(smses);
     } else {
       return nexmoSend(ourNumber, userNumber, 'Some strange error occurred');
