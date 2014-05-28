@@ -15,6 +15,7 @@ var Twit = require('twit');
 var routes = require('./routes/index');
 var login = require('./routes/login');
 var search = require('./routes/search');
+var sms = require('./routes/sms');
 var nexmo = require('./routes/nexmo');
 
 var db = require('orchestrate')(process.env.ORCHESTRATE_TOKEN || ENV.ORCHESTRATE_TOKEN);
@@ -41,7 +42,7 @@ app.use(passport.session());
 app.get('/', routes);
 app.get('/login', login);
 app.post('/login', login);
-app.get('/search', search);
+app.get('/sms', sms);
 app.post('/search', search);
 app.post('/nexmo', nexmo);
 
