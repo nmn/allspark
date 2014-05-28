@@ -32,7 +32,7 @@ var funcs = {
     } else {
       console.log('path is ', 'D:\\home\\site\\wwwroot\\' + text);
       apiRequest = fs.readFileAsync('D:\\home\\site\\wwwroot\\' + text).then(function(audioFile){
-        options.body = audioFile;
+        //options.body = audioFile;
         return post({
           url:  'https://api.wit.ai/speech',
           headers: {
