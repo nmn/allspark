@@ -9,9 +9,9 @@ var passport = require('passport');
 var TwitterStrategy = require('passport-twitter').Strategy;
 var ENV = require('./env.js');
 
-// var routes = require('./routes/index');
-// var login = require('./routes/login');
-// var search = require('./routes/search');
+var routes = require('./routes/index');
+var login = require('./routes/login');
+var search = require('./routes/search');
 
 var app = express();
 
@@ -55,7 +55,7 @@ passport.use(new TwitterStrategy({
 
 //twitter auth routes
 app.get('/auth/twitter', passport.authenticate('twitter'));
-app.get('/auth/twitter/callback', 
+app.get('/auth/twitter/callback',
   passport.authenticate('twitter', { failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication, redirect home.

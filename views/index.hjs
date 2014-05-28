@@ -1,12 +1,6 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>{{ title }}</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1>{{ title }}</h1>
-    <p>Welcome to Allspark</p>
-    <p>Please log in</p>
-  </body>
-</html>
+<form method="post" action="/search">
+  Your wish is my command:
+  <input type="text" name="searchInput">
+  <input type="submit" value="Submit">
+</form>
