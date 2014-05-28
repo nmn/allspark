@@ -115,6 +115,7 @@ var funcs = {
               }
             });
           } else {
+            console.log('Problem Data?', result);
             return "Sorry, you need to log in.";
           }
         }
