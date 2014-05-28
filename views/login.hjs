@@ -7,7 +7,7 @@
   <body>
     <h1>{{ title }}</h1>
     <p>Login with Twitter:
-      <a href=""><img src="/img/sign-in-with-twitter-gray.png"></a>
+      <a href="/auth/twitter"><img src="/img/sign-in-with-twitter-gray.png"></a>
     </p>
   </body>
 </html>
