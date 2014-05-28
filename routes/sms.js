@@ -18,6 +18,7 @@ module.exports = function(req, res){
       //   return nexmoSend(ourNumber, userNumber, tweet);
       // });
       var smses = response.map(function(tweet){
+        console.log('trying to send...', tweet);
         return nexmoSend(ourNumber, userNumber, tweet);
       });
       return Promise.all(smses);
