@@ -1,6 +1,6 @@
 
-module.export = function(req,res){
+module.exports = function(req,res){
   console.log(req.files);
   res.set('content-type', 'text/xml');
-  res.render('vxmlresponse');
+  res.render('vxmlresponse',{});
 }
