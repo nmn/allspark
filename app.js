@@ -26,7 +26,9 @@ app.use(require('stylus').middleware(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', routes);
-app.use('/login', login);
+app.get('/login', login);
+app.post('/login', login);
+app.get('/search', search);
 app.post('/search', search);
 
 
