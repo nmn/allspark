@@ -8,10 +8,23 @@
   <body>
     <section class="center">
       <div>
-        <div class="logo"></div>
+        <div class="logo">
+          <div class="bottom"></div>
+          <div class="left"></div>
+          <div class="right"></div>
+          <div class="top">
+            <div class="front"></div>
+          </div>
+        </div>
         <h1>Welcome to the AllSpark</h1>
         <a href="/auth/twitter"><img src="/img/sign-in-with-twitter-gray.png" alt="sign in with Twitter"></a>
       </div>
     </section>
+    <script>
+      // (function(window, undefined){
+      //   var document = window.document;
+      //   var 
+      // })(this)
+    </script>
   </body>
 </html>

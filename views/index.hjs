@@ -15,8 +15,15 @@
       <!-- <a href="/auth/twitter"><img src="/img/sign-in-with-twitter-gray.png" alt="sign in with Twitter"></a> -->
     </div>
     <section class="center">
-      <form >
-        <input type="text" class="commandBox" name="searchInput" placeholder="Command the AllSpark. Knowledge awaits.">
+      <form method="post" action="/search">
+        <div class="hints">
+          <span>tweet this is a great conference</span>
+          <span>what is the distance to the moon</span>
+          <span>what is a snake</span>
+          <span>Show me my last 3 tweets</span>
+          <span>What's happening on Twitter?</span>
+        </div>
+        <input type="text" name="searchInput" placeholder="Command the AllSpark. Knowledge awaits.">
         <input type="submit" value="Submit">
         or query at +1 (215) 302-9514
       </form>

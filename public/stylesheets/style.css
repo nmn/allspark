@@ -104,6 +104,14 @@ section.center {
   height: 100%;
   font-size: 0;
   text-align: center;
+  -webkit-perspective: 800px;
+  -moz-perspective: 800px;
+  -ms-perspective: 800px;
+  perspective: 800px;
+  -webkit-perspective-origin: 50% 50%;
+  -moz-perspective-origin: 50% 50%;
+  -ms-perspective-origin: 50% 50%;
+  perspective-origin: 50% 50%;
 }
 section.center::before {
   content: '';
@@ -113,6 +121,7 @@ section.center::before {
   vertical-align: middle;
 }
 section.center > form {
+  position: relative;
   display: inline-block;
   vertical-align: middle;
   font-size: 1rem;
@@ -125,6 +134,75 @@ section.center > form {
   padding: 2rem;
   font-family: 'Helvetica Neue', Helvetica, sans-serif;
   font-weight: 200;
+}
+section.center > form .hints {
+  position: absolute;
+  font-family: 'Helvetica Neue', Helvetica, sans-serif;
+  font-weight: 200;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: auto;
+  height: 2rem;
+  text-align: center;
+}
+section.center > form .hints span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-weight: 200;
+  color: rgba(120,170,250,0.75);
+  font-size: 1.3rem;
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+  -webkit-animation-name: fadeInOut;
+  -moz-animation-name: fadeInOut;
+  -o-animation-name: fadeInOut;
+  -ms-animation-name: fadeInOut;
+  animation-name: fadeInOut;
+  -webkit-animation-duration: 4s;
+  -moz-animation-duration: 4s;
+  -o-animation-duration: 4s;
+  -ms-animation-duration: 4s;
+  animation-duration: 4s;
+}
+section.center > form .hints span:nth-child(1) {
+  -webkit-animation-delay: 0;
+  -moz-animation-delay: 0;
+  -o-animation-delay: 0;
+  -ms-animation-delay: 0;
+  animation-delay: 0;
+}
+section.center > form .hints span:nth-child(2) {
+  -webkit-animation-delay: 4s;
+  -moz-animation-delay: 4s;
+  -o-animation-delay: 4s;
+  -ms-animation-delay: 4s;
+  animation-delay: 4s;
+}
+section.center > form .hints span:nth-child(3) {
+  -webkit-animation-delay: 8s;
+  -moz-animation-delay: 8s;
+  -o-animation-delay: 8s;
+  -ms-animation-delay: 8s;
+  animation-delay: 8s;
+}
+section.center > form .hints span:nth-child(4) {
+  -webkit-animation-delay: 12s;
+  -moz-animation-delay: 12s;
+  -o-animation-delay: 12s;
+  -ms-animation-delay: 12s;
+  animation-delay: 12s;
+}
+section.center > form .hints span:nth-child(5) {
+  -webkit-animation-delay: 16s;
+  -moz-animation-delay: 16s;
+  -o-animation-delay: 16s;
+  -ms-animation-delay: 16s;
+  animation-delay: 16s;
 }
 section.center > form input[type='text'] {
   border: 1px solid rgba(120,170,250,0.75);
@@ -159,24 +237,121 @@ section.center > div {
   margin: 0 auto;
   width: 100%;
   text-align: center;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
 }
 section.center > div .logo {
   display: inline-block;
   width: 25%;
   padding-bottom: 25%;
-  border: 2px solid rgba(120,170,250,0.8);
-  -webkit-box-shadow: 0 0 2px rgba(120,170,250,0.8);
-  box-shadow: 0 0 2px rgba(120,170,250,0.8);
   -webkit-transition: 0.5s ease;
   -moz-transition: 0.5s ease;
   -o-transition: 0.5s ease;
   -ms-transition: 0.5s ease;
   transition: 0.5s ease;
-  -webkit-transform: scale(0.55) rotate(45deg);
-  -moz-transform: scale(0.55) rotate(45deg);
-  -o-transform: scale(0.55) rotate(45deg);
-  -ms-transform: scale(0.55) rotate(45deg);
-  transform: scale(0.55) rotate(45deg);
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transform: scale(0.55) rotateX(-20deg);
+  -moz-transform: scale(0.55) rotateX(-20deg);
+  -o-transform: scale(0.55) rotateX(-20deg);
+  -ms-transform: scale(0.55) rotateX(-20deg);
+  transform: scale(0.55) rotateX(-20deg);
+  position: relative;
+  background: rgba(255,255,255,0.4);
+}
+section.center > div .logo .bottom,
+section.center > div .logo .left,
+section.center > div .logo .right,
+section.center > div .logo .top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  -o-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  background-image: url("/img/cubeface.png");
+  opacity: 0.75;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=75)";
+  filter: alpha(opacity=75);
+}
+section.center > div .logo .top {
+  -webkit-transform-origin: 50% 0;
+  -moz-transform-origin: 50% 0;
+  -o-transform-origin: 50% 0;
+  -ms-transform-origin: 50% 0;
+  transform-origin: 50% 0;
+  -webkit-transform: rotateX(90deg);
+  -moz-transform: rotateX(90deg);
+  -o-transform: rotateX(90deg);
+  -ms-transform: rotateX(90deg);
+  transform: rotateX(90deg);
+}
+section.center > div .logo .top .front {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-transform-origin: 50% 100%;
+  -moz-transform-origin: 50% 100%;
+  -o-transform-origin: 50% 100%;
+  -ms-transform-origin: 50% 100%;
+  transform-origin: 50% 100%;
+  -webkit-transform: rotateX(90deg);
+  -moz-transform: rotateX(90deg);
+  -o-transform: rotateX(90deg);
+  -ms-transform: rotateX(90deg);
+  transform: rotateX(90deg);
+  background-image: url("/img/cubeface.png");
+  opacity: 0.95s;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=95s)";
+  filter: alpha(opacity=95s);
+}
+section.center > div .logo .bottom {
+  -webkit-transform-origin: 50% 100%;
+  -moz-transform-origin: 50% 100%;
+  -o-transform-origin: 50% 100%;
+  -ms-transform-origin: 50% 100%;
+  transform-origin: 50% 100%;
+  -webkit-transform: rotateX(-90deg);
+  -moz-transform: rotateX(-90deg);
+  -o-transform: rotateX(-90deg);
+  -ms-transform: rotateX(-90deg);
+  transform: rotateX(-90deg);
+}
+section.center > div .logo .left {
+  -webkit-transform-origin: 0% 50%;
+  -moz-transform-origin: 0% 50%;
+  -o-transform-origin: 0% 50%;
+  -ms-transform-origin: 0% 50%;
+  transform-origin: 0% 50%;
+  -webkit-transform: rotateY(-90deg);
+  -moz-transform: rotateY(-90deg);
+  -o-transform: rotateY(-90deg);
+  -ms-transform: rotateY(-90deg);
+  transform: rotateY(-90deg);
+}
+section.center > div .logo .right {
+  -webkit-transform-origin: 100% 50%;
+  -moz-transform-origin: 100% 50%;
+  -o-transform-origin: 100% 50%;
+  -ms-transform-origin: 100% 50%;
+  transform-origin: 100% 50%;
+  -webkit-transform: rotateY(90deg);
+  -moz-transform: rotateY(90deg);
+  -o-transform: rotateY(90deg);
+  -ms-transform: rotateY(90deg);
+  transform: rotateY(90deg);
 }
 @media screen and (max-width: 56rem) {
   section.center > div .logo {
@@ -185,11 +360,11 @@ section.center > div .logo {
   }
 }
 section.center > div .logo:hover {
-  -webkit-transform: scale(0.65) rotate(40deg);
-  -moz-transform: scale(0.65) rotate(40deg);
-  -o-transform: scale(0.65) rotate(40deg);
-  -ms-transform: scale(0.65) rotate(40deg);
-  transform: scale(0.65) rotate(40deg);
+  -webkit-transform: scale(0.65) translateX(-20%) translateY(20%) rotateX(30deg) rotateY(30deg);
+  -moz-transform: scale(0.65) translateX(-20%) translateY(20%) rotateX(30deg) rotateY(30deg);
+  -o-transform: scale(0.65) translateX(-20%) translateY(20%) rotateX(30deg) rotateY(30deg);
+  -ms-transform: scale(0.65) translateX(-20%) translateY(20%) rotateX(30deg) rotateY(30deg);
+  transform: scale(0.65) translateX(-20%) translateY(20%) rotateX(30deg) rotateY(30deg);
 }
 section.center > div h1 {
   color: #78aafa;
@@ -212,4 +387,92 @@ section.center > div img:hover {
   opacity: 1;
   -ms-filter: none;
   filter: none;
+}
+@-moz-keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+  }
+  25% {
+    opacity: 1;
+    -ms-filter: none;
+    filter: none;
+  }
+  75% {
+    opacity: 1;
+    -ms-filter: none;
+    filter: none;
+  }
+  100% {
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+  }
+}
+@-webkit-keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+  }
+  25% {
+    opacity: 1;
+    -ms-filter: none;
+    filter: none;
+  }
+  75% {
+    opacity: 1;
+    -ms-filter: none;
+    filter: none;
+  }
+  100% {
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+  }
+}
+@-o-keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+  }
+  25% {
+    opacity: 1;
+    -ms-filter: none;
+    filter: none;
+  }
+  75% {
+    opacity: 1;
+    -ms-filter: none;
+    filter: none;
+  }
+  100% {
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+  }
+}
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+  }
+  25% {
+    opacity: 1;
+    -ms-filter: none;
+    filter: none;
+  }
+  75% {
+    opacity: 1;
+    -ms-filter: none;
+    filter: none;
+  }
+  100% {
+    opacity: 0;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+  }
 }
