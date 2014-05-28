@@ -139,7 +139,7 @@ var funcs = {
 
   },
 
-  'voice': function(audioFile){
+  'voice': function(path){
 
   }
 
