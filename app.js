@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 
 var passport = require('passport');
 var TwitterStrategy = require('passport-twitter').Strategy;
+
 var ENV = require('./env.js');
 var Twit = require('twit');
 
@@ -67,10 +68,11 @@ app.get('/tweet/testers', function(req, res){
 
 //twitter passport implementation
 passport.use(new TwitterStrategy({
-  consumerKey: ENV.TWITTER_CONSUMER_KEY,
-  consumerSecret: ENV.TWITTER_CONSUMER_SECRET,
-  callbackURL: ENV.TWITTER_CALLBACK_URL
+    consumerKey: process.env.TWITTER_CONSUMER_KEY || ENV.TWITTER_CONSUMER_KEY,
+    consumerSecret: process.env.TWITTER_CONSUMER_SECRET || ENV.TWITTER_CONSUMER_SECRET,
+    callbackURL: process.env.TWITTER_CALLBACK_URL || ENV.TWITTER_CALLBACK_URL
   },
+
   function(token, tokenSecret, profile, done) {
     // console.log("twitterProfile", profile);
     // console.log("twitterProfileID", profile.id);
@@ -102,7 +104,7 @@ passport.deserializeUser(function(obj, done) {
 
 //twitter auth routes
 app.get('/auth/twitter', passport.authenticate('twitter'));
-app.get('/auth/twitter/callback', 
+app.get('/auth/twitter/callback',
   passport.authenticate('twitter', { failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
