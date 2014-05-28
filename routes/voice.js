@@ -10,7 +10,7 @@ module.exports = function(req,res){
   var path = req.files.recording.path;
 
   res.set('content-type', 'text/xml');
-  hitWit.voice(path, userNumber, undefined, true).then(function(response){
+  hitWit.text(path, userNumber, undefined, true).then(function(response){
     if(typeof response === 'string') {
       return res.render('vxmlresponse',{prompts : [
         {message: response}
