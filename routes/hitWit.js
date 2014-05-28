@@ -151,6 +151,7 @@ function findTwitTokens(phoneNumber){
       throw new Error("can't decide");
     }
     user = user.body.results[0].value;
+    console.log(user);
     return [user.token, user.tokenSecret, user.id];
   });
 }
