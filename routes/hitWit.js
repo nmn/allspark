@@ -1,28 +1,51 @@
 var Promise = require('bluebird');
 var request = require('request');
 var twitter = require('./../actions/twitter');
+var fs = require('fs');
+fs = Promise.promisifyAll(fs);
 
 var db = require('orchestrate')("94e01e36-60c0-42f6-a3e8-826fe56c5057");
 
+var post = Promise.promisify(request.post.bind(request));
 request = Promise.promisify(request);
 
 var wolfram = require('./../actions/wolfram');
 
 var funcs = {
-  'text': function(text, userNumber, session) {
+  'text': function(text, userNumber, session, isAudio) {
+
+    var apiRequest, query, options;
 
     console.log("query", text);
 
-    var query = encodeURIComponent(text);
 
-    var options = {
-      url:  'https://api.wit.ai/message?v=20140528&q='+query,
-      headers: {
-        'Authorization': 'Bearer TE4IZYGQG7ZR2CBQE4RYZGKDNYYSIVDA'
+    if(!isAudio){
+      query = encodeURIComponent(text);
+      options = {
+        url:  'https://api.wit.ai/message?v=20140528&q='+query,
+        headers: {
+          'Authorization': 'Bearer TE4IZYGQG7ZR2CBQE4RYZGKDNYYSIVDA'
+        }
       }
+      apiRequest = request(options);
+
+    } else {
+
+      apiRequest = fs.readFileAsync(__dirname + text).then(function(audioFile){
+        options.body = audioFile;
+        return post({
+          url:  'https://api.wit.ai/speech',
+          headers: {
+            'Authorization': 'Bearer TE4IZYGQG7ZR2CBQE4RYZGKDNYYSIVDA',
+            'Content-type': 'audio/wav',
+            'Accept': 'application/vnd.wit.20140528+json'
+          },
+          body: audioFile
+        });
+      })
     }
 
-    return request(options)
+    return apiRequest
     .spread(function(response, body){
       var data = JSON.parse(body);
       //console.log('body', data.outcome);
@@ -139,7 +162,7 @@ var funcs = {
 
   },
 
-  'voice': function(path){
+  'voice': function(path, userNumber, session){
     return new Promise(function(resolve, reject){
       resolve("Hey this will be an answer...");
     });
