@@ -43,8 +43,8 @@ var funcs = {
           body: audioFile
         });
       })
-      .catch(function(){
-        console.log("This is an error with posting the data..");
+      .catch(function(err){
+        console.log("This is an error with posting the data..", err);
       })
     }
 
