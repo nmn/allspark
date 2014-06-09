@@ -1,8 +1,6 @@
 allspark
 ========
-AllSpark is a siri for dumb phones. Built at APIcon 2014. 
-
-http://naman.s3.amazonaws.com/famousry/famousry.gif
+AllSpark is a siri for dumb phones. Built at APIcon 2014.
 
 > Winner : Nexmo: Best Use
 > Winner : Wit.AI: Best Use
